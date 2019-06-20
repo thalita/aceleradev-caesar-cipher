@@ -9,16 +9,16 @@ function run() {
     let crypto = new cryptoService();
 
     handler.readFile().then((result) => {
-        let teste = JSON.parse(result);
-        let text = crypto.decipherText(teste);
+        let json = JSON.parse(result);
+        let text = crypto.decipherText(json);
 
-        teste.decifrado = text;
-        teste.resumo_criptografico = crypto.encryptTextSHA1(text);
-        handler.rewriteFile(JSON.stringify(teste)).then(
+        json.decifrado = text;
+        json.resumo_criptografico = crypto.encryptTextSHA1(text);
+        handler.rewriteFile(JSON.stringify(json)).then(
           () =>{
-            request(teste.token);
+            request(json.token);
           }
-        )       
+        )
     });
 }
 
